@@ -40,7 +40,7 @@ def token(post_authorization):
 # Фикстура на создание заметки и возврат заметки по id, переиспользуем фикстуры get_notes, post_notes
 # Актуально для DELETE удаление заметки - предусловия создание заметки и возвращение нашей созданной заметки
 @pytest.fixture
-def setup_create_note(get_notes, post_notes): # создаём заметку
+def setup_create_note_id(get_notes, post_notes): # создаём заметку
     post_notes.create_note()
     id_note = get_notes.get_note_by_title(
         JsonForPostNotesTest.DATA_POST_NOTES["title"]) # получаем id заметки
