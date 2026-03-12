@@ -3,7 +3,7 @@ from api.base_url import BaseUrl
 
 
 class PostAuthorization(BaseUrl):
-    # Авторизация с помощью метода POST
+    """Авторизация с помощью метода POST"""
     ENDPOINT = "/api/login"
     token = ""
 
@@ -15,7 +15,3 @@ class PostAuthorization(BaseUrl):
     def get_token(self):
         auth = self.user_authorization()
         return auth.json()["token"]
-
-a = PostAuthorization()
-print(a.user_authorization())
-print(a.get_token())

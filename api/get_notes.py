@@ -2,7 +2,7 @@ from api.base_url import BaseUrl
 
 
 class GetNotes(BaseUrl):
-    #  Получение id заметки через метод GET
+    """Получение id заметки через метод GET"""
     ENDPOINT = "/api/notes"
 
     def __init__(self, token):
@@ -19,7 +19,3 @@ class GetNotes(BaseUrl):
             if title in note["title"]:
                 return note["id"]
         return None
-
-token = BaseUrl.token
-notes = GetNotes(token).get_notes().json()
-print(notes)

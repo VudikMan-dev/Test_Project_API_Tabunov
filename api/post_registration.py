@@ -3,7 +3,7 @@ from api.base_url import BaseUrl
 
 
 class PostRegistration(BaseUrl):
-    # Регистрация с помощью метода POST
+    """Регистрация с помощью метода POST"""
     ENDPOINT = "/api/register"
 
     def user_registration(self):

@@ -2,7 +2,7 @@ from api.base_url import BaseUrl
 
 
 class DeleteNotes(BaseUrl):
-    # Удаление заметки через метод DELETE с помощью id
+    """Удаление заметки через метод DELETE с помощью id"""
     ENDPOINT = "/api/notes"
 
     def __init__(self, token):
