@@ -1,24 +1,21 @@
-import requests
 from api.base_url import BaseUrl
-        #  Получение id заметки через метод GET
 
 
-class GetNotes:
+class GetNotes(BaseUrl):
+    """Получение id заметки через метод GET"""
+    ENDPOINT = "/api/notes"
+
     def __init__(self, token):
         self.token = token
-    URL = f"{BaseUrl.BASE_URL}/api/notes"
-
-    def get_headers(self):
-        return {"accept": "application/json", "Authorization": f"Bearer {self.token}"}
 
     def get_notes(self):
-        response = requests.get(url=f"{self.URL}", headers=self.get_headers())
+        response = self._request(method="GET", need_token=True)
         return response
 
     def get_note_by_title(self, title):
         response = self.get_notes()
-        notes = response.json() # получаем список заметок
-        for note in notes:
+        note = response.json() # получаем список заметок
+        for note in note:
             if title in note["title"]:
                 return note["id"]
         return None
