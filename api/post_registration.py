@@ -1,14 +1,12 @@
-import requests
 from test.data.json_for_post_registration import JsonForPostRegistration
 from api.base_url import BaseUrl
-        # Регистрация с помощью метода POST
 
 
-class PostRegistration:
-    URL = f"{BaseUrl.BASE_URL}/api/register"
-    HEADERS_REGISTRATION = {"accept": "application/json", "Content-Type": "application/json"}
+class PostRegistration(BaseUrl):
+    # Регистрация с помощью метода POST
+    ENDPOINT = "/api/register"
+
     def user_registration(self):
-        response_registration = requests.post(url=f"{self.URL}",
-                                              headers=self.HEADERS_REGISTRATION,
+        response_registration = self._request(method=f"Post",
                                               json=JsonForPostRegistration.DATA_POST_REGISTRATION)
         return response_registration

@@ -3,3 +3,4 @@ class TestGetApi:
         response = get_notes.get_notes()
         json_response = response.json()
         assert response.status_code == 200
+        assert len(json_response) > 0

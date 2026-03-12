@@ -1,2 +1,2 @@
 class JsonForPostNotesTest:
-    DATA_POST_NOTES = {"content": "Новая заметка 4", "title": "Ключевая заметка"}
+    DATA_POST_NOTES = {"content": "Новая заметка 5", "title": "Ключевая заметка"}

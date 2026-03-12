@@ -1,21 +1,18 @@
-import requests
 from test.data.json_for_post_notes import JsonForPostNotesTest
 from api.base_url import BaseUrl
-        # Создание заметки через метод POST
 
 
-class PostNotes:
+class PostNotes(BaseUrl):
+    # Создание заметки через метод POST
+    ENDPOINT = "/api/notes"
+
     def __init__(self, token):
         self.token = token
-    URL = f"{BaseUrl.BASE_URL}/api/notes"
-
-    def headers_post_notes(self):
-        return {"accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}"}
 
     def create_note(self):
-        response = requests.post(url=f"{self.URL}",
-                                 headers=self.headers_post_notes(),
+        response = self._request(method="Post", need_token=True,
                                  json=JsonForPostNotesTest.DATA_POST_NOTES)
         return response
+
+a = PostNotes(BaseUrl)
+print(a.create_note())
