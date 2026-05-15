@@ -10,6 +10,14 @@ class PostNotes(BaseUrl):
         self.token = token
 
     def create_note(self):
-        response = self._request(method="Post", need_token=True,
-                                 json=JsonForPostNotesTest.DATA_POST_NOTES)
+        response = self._request(method="POST", need_token=True, json=JsonForPostNotesTest.DATA_POST_NOTES)
+        return response
+
+    def create_note_without_token(self):
+        response = self._request(method="POST", need_token=False, json=JsonForPostNotesTest.DATA_POST_NOTES)
+        return response
+
+    def create_note_invalid_token(self):
+        self.token = "invalid_token"
+        response = self._request(method="POST", need_token=True, json=JsonForPostNotesTest.DATA_POST_NOTES)
         return response
