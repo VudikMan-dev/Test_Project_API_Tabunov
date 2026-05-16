@@ -9,14 +9,14 @@ class TestDeleteNotesApi:
 
     def test_delete_notes_without_token(self, delete_client, setup_create_note):
         """Проверка статус кода 401 и текста Token is missing!"""
-        response = delete_client.delete_notes_without_token(setup_create_note)
+        response = delete_client.delete_notes(setup_create_note, need_token=False)
         json_response = response.json()
         assert response.status_code == 401
         assert json_response["message"] == "Token is missing!"
 
     def test_delete_notes_invalid_token(self, delete_client, setup_create_note, teardown_note_delete):
         """Проверка статус кода 403 и текста Token is invalid or expired!"""
-        response = delete_client.delete_notes_invalid_token(setup_create_note)
+        response = delete_client.delete_notes(setup_create_note, token="invalid_token")
         json_response = response.json()
         assert response.status_code == 403
         assert json_response["message"] == "Token is invalid or expired!"
