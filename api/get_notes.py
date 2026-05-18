@@ -1,3 +1,5 @@
+import allure
+
 from api.base_url import BaseUrl
 
 
@@ -13,6 +15,7 @@ class GetNotes(BaseUrl):
         response = self._request(method="GET", need_token=True)
         return response
 
+    @allure.step("Ищем заметку по её названию")
     def get_note_by_title(self, title):
         """Метод поиска заметки по заголовку"""
         response = self.get_notes()

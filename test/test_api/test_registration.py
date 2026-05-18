@@ -23,7 +23,7 @@ class TestRegistration:
     def test_user_registration_bad_request(self, post_registration):
         """Проверка статус кода при неправильном запросе"""
         response = post_registration.user_registration(data={})
-        assert response.status_code == 400  # тут баг т.к по свагеру мы ждём код 400 "Неправильный запрос", приходит 500
+        assert response.status_code == 400, f"Ожидали 400, получили {response.status_code}"
 
     def test_registration_duplicate_email(self, post_registration):
         """проверка Пользователь с таким email уже существует 409"""

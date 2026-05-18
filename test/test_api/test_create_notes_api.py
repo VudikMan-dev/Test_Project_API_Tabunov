@@ -21,7 +21,8 @@ class TestCreateNotesApi:
 
     def test_create_note_invalid_token(self, post_notes):
         """Проверка статус кода 403 и текста Token is invalid or expired!"""
-        response = post_notes.create_note(token="invalid_token")
+        body = JsonForPostNotesTest.DATA_POST_NOTES
+        response = post_notes.create_note(body=body, token="invalid_token")
         json_response = response.json()
         assert response.status_code == 403
         assert json_response["message"] == "Token is invalid or expired!"

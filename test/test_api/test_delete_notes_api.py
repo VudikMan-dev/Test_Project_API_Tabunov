@@ -27,4 +27,4 @@ class TestDeleteNotesApi:
         json_response = response.json()
         assert response.status_code == 409
         assert json_response["message"] == "Not authorized to delete this note!"
-        # тут баг, по требовнаиям в конйе текста должен быть восклицательный знак
+        # тут баг, по требовнаиям в конце текста должен быть восклицательный знак
