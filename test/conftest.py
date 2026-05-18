@@ -5,7 +5,7 @@ from api.get_notes import GetNotes
 from api.post_authorization import PostAuthorization
 from api.post_notes import PostNotes
 from api.post_registration import PostRegistration
-from test.data.json_for_post_autorization import JsonForPostAuthorization
+from test.data.json_for_post_autorization import DATA_POST_AUTHORIZATION
 from test.data.json_for_post_notes import JsonForPostNotesTest
 
 
@@ -43,15 +43,15 @@ def delete_client(token):
 @pytest.fixture
 def token(post_authorization):
     """Фикстура на получение токена, переиспользуем фикстуру post_authorization() и метод get_token()"""
-    return post_authorization.get_token(email=JsonForPostAuthorization.DATA_POST_AUTHORIZATION["email"],
-                                        password=JsonForPostAuthorization.DATA_POST_AUTHORIZATION["password"])
+    return post_authorization.get_token(email=DATA_POST_AUTHORIZATION["email"],
+                                        password=DATA_POST_AUTHORIZATION["password"])
 
 
 @pytest.fixture
 def setup_create_note(notes_client, post_notes):  # создаём заметку
     """Фикстура на создание заметки и возврат заметки по id, переиспользуем фикстуры notes_client, post_notes
     Актуально для DELETE удаление заметки - предусловия создание заметки и возвращение нашей созданной заметки"""
-    post_notes.create_note()
+    post_notes.create_note(body=JsonForPostNotesTest.DATA_POST_NOTES)
     id_note = notes_client.get_note_by_title(
         JsonForPostNotesTest.DATA_POST_NOTES["title"])  # получаем id заметки
     return id_note  # возвращаем заметку
@@ -68,11 +68,11 @@ def teardown_note_delete(notes_client, delete_client):  # ничего не де
 
 
 @pytest.fixture
-def setup_teardown_note(delete_notes, setup_create_note):  # создаём заметку и возвращаем id
+def setup_teardown_note(delete_client, setup_create_note):  # создаём заметку и возвращаем id
     """Фикстура на создание заметки и удаление вконце теста, переиспользуем фикстуры delete_notes, setup_create_note
     Актуально для GET - предусловия создание заметки и постусловия удаление заметки"""
     yield setup_create_note  # возвращаем заметку
-    delete_notes.delete_notes(setup_create_note)  # удаляем заметку вконце теста
+    delete_client.delete_notes(setup_create_note)  # удаляем заметку вконце теста
 
 
 @pytest.fixture
